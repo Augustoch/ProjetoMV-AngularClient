@@ -18,7 +18,6 @@ export class PessoaComponent implements OnInit {
   phones: Telefone[];
   phone: Telefone;
   tele: Array<Telefone>;
-  
 
   constructor(private pessoaService: PessoaService) {
     this.pessoa = new Pessoa();
@@ -30,28 +29,29 @@ export class PessoaComponent implements OnInit {
   
   
   salvarNoBanco(){
+    this.pessoa.telefones = this.phones;
+    console.log(JSON.stringify(this.pessoa));
     this.pessoaService.salvarPessoaNoBanco(this.pessoa);
-    alert("Pessoa "+this.pessoa.nome+" salva")
+    
+   
   }
   
-  onSubmit(f){
-    this.pessoa.telefones = this.phones;
-    console.log(f);
-    console.log(this.pessoa); 
-  }
+  
   
   salvarTelefone(){
     
     this.phone =  new Telefone();
     this.phone.ddd = this.telefone.ddd;
-    this.phone.numero = this.telefone.numero
-    
+    this.phone.numero = this.telefone.numero;
+        
     this.phones.push(this.phone);
-    
+    alert(JSON.stringify(this.phones));
   }
 
   removerNumero(phone: Telefone){
-    this.phones.splice(this.phones.indexOf(phone));
+    alert("valor do array"+this.phones.indexOf(phone));
+    
+    this.phones.splice(this.phones.indexOf(phone),1);
     }
   
 

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<h3>Listagem de Pessoas</h3>
+<div class="row w-75 p-3">
+    <div class="form-group" class="col-md-4">
+        <label>Nome: </label>
+        <input type="text" class="form-control" name="nome">
+    </div>
+    <div class="form-group" class="col-md-4">
+        <label>CPF: </label>
+        <input type="text" class="form-control" name="cpf">
+        
+    </div>
+    
+    <div class="btn-group row w-75 p-3 col-md-4">
+        <button type="button" class="btn btn-secondary btn-sm">Pesquisar</button>
+        <button type="button" routerLink="/cadastro" routerLinkActive="active" class="btn btn-outline-success btn-sm">Cadastrar</button>
+    </div>
+
+</div>
+<hr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>CPF</th>
+            <th>Idade</th>
+            <th>Quantidade de Telefones</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let pesso of pess">
+        <td>{{pesso.pessoam.id}}</td>
+        <td>{{pesso.pessoam.nome}}</td>
+        <td>{{pesso.pessoam.email}}</td>
+        <td>{{pesso.pessoam.cpf}}</td>
+        <td>{{pesso.pessoam.idade}}</td>
+        <td>{{pesso.qtdN}}</td>
+        <td>
+            <button type="button" routerLink="/editar" (click)="chamaEditor(pesso.pessoam)"  class="btn btn-outline-info btn-sm">Editar</button>
+            <button type="button" (click)="excluirPessoa(pesso.pessoam)" 
+            routerLink="/listagem" class="btn btn-outline-danger btn-sm">Excluir</button>
+
+        </td>
+
+    </tr>
+</table>
