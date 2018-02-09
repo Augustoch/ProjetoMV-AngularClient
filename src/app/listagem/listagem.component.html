@@ -51,12 +51,12 @@
         <td>{{pesso.pessoam.nome}}</td>
         <td>{{pesso.pessoam.email}}</td>
         <td>{{pesso.pessoam.cpf}}</td>
-        <td>{{pesso.pessoam.idade}}</td>
+        <td>{{2018 - pesso.pessoam.dataDeNascimento.getFullYear()}} Anos</td>
         <td>{{pesso.qtdN}}</td>
         <td>
             <button type="button" routerLink="/editar" (click)="chamaEditor(pesso.pessoam)"  class="btn btn-outline-info btn-sm">Editar</button>
             <button type="button" (click)="excluirPessoa(pesso.pessoam)" 
-            routerLink="/listagem" class="btn btn-outline-danger btn-sm">Excluir</button>
+             class="btn btn-outline-danger btn-sm">Excluir</button>
 
         </td>
 

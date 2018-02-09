@@ -30,7 +30,7 @@ export class PessoaComponent implements OnInit {
   
   salvarNoBanco(){
     this.pessoa.telefones = this.phones;
-    console.log(JSON.stringify(this.pessoa));
+    
     this.pessoaService.salvarPessoaNoBanco(this.pessoa);
     
    
@@ -45,11 +45,11 @@ export class PessoaComponent implements OnInit {
     this.phone.numero = this.telefone.numero;
         
     this.phones.push(this.phone);
-    alert(JSON.stringify(this.phones));
+    
   }
 
   removerNumero(phone: Telefone){
-    alert("valor do array"+this.phones.indexOf(phone));
+    
     
     this.phones.splice(this.phones.indexOf(phone),1);
     }

@@ -1,3 +1,5 @@
+import { element } from 'protractor';
+import { PessoaService } from './../pessoa.service';
 import { Telefone } from './../telefone.model';
 import { ListagemComponent } from './../../listagem/listagem.component';
 import { Pessoa } from './../pessoa.model';
@@ -14,27 +16,25 @@ export class EditarPessoaComponent implements OnInit {
 
   pessoa: Pessoa = ListagemComponent.pessoaEditar
   telefones: Telefone[];
-  phones: Telefone[];
+  
   phone: Telefone;
-  constructor() {
+  constructor(private pessoaService: PessoaService) {
     this.phone = new Telefone;
-    console.log(this.pessoa);
+    
   }
 
   ngOnInit() {
-    this.phones = new Array
+    
     this.telefones = new Array
     this.pessoa.telefones.forEach(element => {
-      let telefone: Telefone = new Telefone;
-      telefone = element;
-      this.telefones.push(telefone);
+      
+      this.telefones.push(element);
     });
-    console.log(this.telefones);
+    
   }
 
   salvarTelefone() {
     let telefone: Telefone = new Telefone;
-    telefone.id = this.phone.id;
     telefone.ddd = this.phone.ddd;
     telefone.numero = this.phone.numero;
     this.telefones.push(telefone);
@@ -42,6 +42,16 @@ export class EditarPessoaComponent implements OnInit {
 
   removerNumero(phone) {
     this.telefones.splice(this.telefones.indexOf(phone), 1);
+  }
+
+  atualizarNoBanco(){
+    this.pessoa.telefones = new Array;
+    this.telefones.forEach(element => {
+      this.pessoa.telefones.push(element);
+    });
+    console.log("fred vs "+JSON.stringify(this.pessoa));
+    this.pessoaService.atualizarPessoa(this.pessoa).subscribe();
+    
   }
 
 }

@@ -22,7 +22,7 @@ export class ListagemComponent implements OnInit {
   pessoas: Pessoa[];
   pess: pessoaQtdN[];
   public static pessoaEditar: Pessoa;
-  p:string = "ovo";
+  
 
 
   constructor(private pessoaService: PessoaService, private location: Location) {
@@ -31,14 +31,15 @@ export class ListagemComponent implements OnInit {
     this.pess = new Array;
     this.pess = this.todasPessoas();
     
+    
   }
 
   ngOnInit() {
-    console.log(this.pessoaService.getPessoas);
+    
     
   }
   private refreshDados() {
-   
+   location.reload();
     
   }
 
@@ -49,12 +50,13 @@ export class ListagemComponent implements OnInit {
   excluirPessoa(pesso: Pessoa) {
     if (confirm("deseja realmente excluir " + pesso.nome)) {
       this.pessoaService.deteletarPessoa(pesso.id).subscribe();
-
+      this.refreshDados();
     }
-    this.refreshDados();
+    
   }
 
   chamaEditor(pessoa: Pessoa) {
+    console.log(JSON.stringify(pessoa));
     ListagemComponent.pessoaEditar = pessoa;
     
   }

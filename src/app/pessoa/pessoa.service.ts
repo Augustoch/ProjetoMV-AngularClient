@@ -26,7 +26,7 @@ export class PessoaService {
 
   emitirPessoa = new EventEmitter<Pessoa>();
 
-  u: string = "http://localhost:8080";
+  u: string = "";
   url: string = "/pessoa/";
   pessoasUrl: string = "/pessoa/todas";
 
@@ -47,30 +47,26 @@ export class PessoaService {
 
 
   deteletarPessoa(id: number): Observable<Pessoa> {
-    
-    console.log(this.url + id);
-    return this.httpCliente.delete<Pessoa>(this.u+this.url+id, this.httpOptions).pipe();
-    
+
+    console.log(this.u+this.url + id);
+    return this.httpCliente.delete<Pessoa>(this.u + this.url + id, this.httpOptions).pipe();
+
   }
 
   salvarPessoaNoBanco(pessoa: Pessoa): Promise<Pessoa> {
     console.log(JSON.stringify(pessoa.nome));
-    
-    return this.http.post(this.u+this.url,JSON.stringify(pessoa)  , { headers: this.headers })
+
+    return this.http.post(this.u + this.url, JSON.stringify(pessoa), { headers: this.headers })
       .toPromise()
       .then(res => res.json() as Pessoa)
       .catch(this.handleErrore);
 
   }
 
-  pegarPessoas(): Promise<Pessoa[]> {
-    return this.http.get(this.pessoasUrl)
-      .toPromise()
-      .then(response => response.json() as Pessoa[])
-      .catch(this.handleErrore);
-
+  atualizarPessoa(pessoa: Pessoa): Observable<Pessoa>{
+    return this.httpCliente.put<Pessoa>(this.u+this.url, JSON.stringify(pessoa), this.httpOptions)
+    .pipe();
   }
-
 
   getPessoas(): pessoaQtdN[] {
     let pps: pessoaQtdN[] = new Array();
@@ -83,11 +79,12 @@ export class PessoaService {
           pp.pessoam.id = data[i].id;
           pp.pessoam.nome = data[i].nome;
           pp.pessoam.cpf = data[i].cpf;
-          pp.pessoam.dataDeNascimento = data[i].dataDeNascimento;
-
+          pp.pessoam.email = data[i].email;
+          pp.pessoam.dataDeNascimento = new Date(data[i].dataDeNascimento);
+          let telefones: Telefone[] = new Array();
           for (let x = 0; x < data[i].telefones.length; x++) {
             let telefone: Telefone = new Telefone();
-            let telefones: Telefone[] = new Array();
+            
             pp.qtdN = data[i].telefones.length;
             telefone.id = data[i].telefones[x].id;
 
@@ -105,13 +102,6 @@ export class PessoaService {
 
     return pps;
   }
-
-  editarPessoaNoComponent(pessoa: Pessoa){
-    this.emitirPessoa.emit(pessoa);
-  }
-
-
-
 
 
   private handleErrore(error: any): Promise<any> {

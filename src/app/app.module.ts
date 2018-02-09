@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { PessoaComponent } from './pessoa/pessoa.component';
 import { RouterModule, Routes} from '@angular/router';
 import { EditarPessoaComponent } from './pessoa/editar-pessoa/editar-pessoa.component';
+import { PgnfComponent } from './pgnf/pgnf.component';
 
 
 
@@ -28,7 +29,8 @@ import { EditarPessoaComponent } from './pessoa/editar-pessoa/editar-pessoa.comp
     AppComponent,
     PessoaComponent,
     ListagemComponent,
-    EditarPessoaComponent
+    EditarPessoaComponent,
+    PgnfComponent
   ],
   imports: [
     BrowserModule,

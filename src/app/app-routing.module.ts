@@ -4,12 +4,14 @@ import { PessoaComponent } from './pessoa/pessoa.component';
 import { ListagemComponent } from './listagem/listagem.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PgnfComponent } from './pgnf/pgnf.component';
 
 const   appRoutes: Routes = [
   {path: '', redirectTo:'/listagem',  pathMatch: 'full'},
   {path: 'listagem', component: ListagemComponent},
   {path: 'cadastro', component: PessoaComponent},
-  {path: 'editar', component: EditarPessoaComponent}
+  {path: 'editar', component: EditarPessoaComponent},
+
 ];
 
 @NgModule({
